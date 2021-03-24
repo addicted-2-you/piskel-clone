@@ -10,10 +10,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '~components': path.resolve(__dirname, './src/components/'),
-      '~constants': path.resolve(__dirname, './src/constants/'),
-      '~store': path.resolve(__dirname, './src/store/'),
-      '~utils': path.resolve(__dirname, './src/utils/'),
+      '~': path.resolve(__dirname, './src/'),
     },
   },
   output: {

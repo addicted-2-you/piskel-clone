@@ -1,7 +1,7 @@
-import store from '~store';
-import { CANVAS_STATE } from '~store/state-types';
+import store from '~/store';
+import { CANVAS_STATE } from '~/store/state-types';
 
-import { getPixel, drawPixel } from '~utils/drawing-canvas.utils';
+import { getPixel, drawPixel } from '~/utils/drawing-canvas.utils';
 
 let canvasesCount = 0;
 
