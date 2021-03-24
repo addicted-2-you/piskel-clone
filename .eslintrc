@@ -1,0 +1,19 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js"],
+        "paths": ["./src"]
+      }
+    }
+  },
+  "rules": {
+    "prettier/prettier": ["error"]
+  },
+  "globals": {
+    "window": true,
+    "document": true
+  }
+}
