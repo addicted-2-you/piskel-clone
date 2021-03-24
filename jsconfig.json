@@ -5,11 +5,11 @@
     "baseUrl": ".",
     "module": "commonjs",
     "paths": {
-      "components/*": ["./src/components/*"],
-      "constants/*": ["./src/constants/*"],
-      "store": ["./src/store/index.js"],
-      "store/*": ["./src/store/*"],
-      "utils/*": ["./src/utils/*"]
+      "~components/*": ["./src/components/*"],
+      "~constants/*": ["./src/constants/*"],
+      "~store": ["./src/store/index.js"],
+      "~store/*": ["./src/store/*"],
+      "~utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"],

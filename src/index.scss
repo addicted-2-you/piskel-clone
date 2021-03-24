@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex-grow: 1;
+
+  background-color: #a0a0a0;
+}
+
+.sidebar {
+  width: 220px;
+
+  background-color: #1d1d1d;
+}
+
+.drawing-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}

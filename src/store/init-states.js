@@ -1,4 +1,4 @@
-import { PEN } from 'constants/tool-names';
+import { PEN } from '~constants/tool-names';
 
 import * as stateTypes from './state-types';
 
@@ -8,6 +8,7 @@ export default [
     {
       canvasHeight: 32,
       canvasWidth: 32,
+      pixelSize: 20,
     },
   ],
   [

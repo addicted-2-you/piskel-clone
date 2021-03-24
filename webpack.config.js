@@ -4,19 +4,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   devtool: 'source-map',
   resolve: {
     extensions: ['.js'],
     alias: {
-      components: path.resolve(__dirname, './src/components/'),
-      constants: path.resolve(__dirname, './src/constants/'),
-      store: path.resolve(__dirname, './src/store/'),
-      utils: path.resolve(__dirname, './src/utils/'),
+      '~components': path.resolve(__dirname, './src/components/'),
+      '~constants': path.resolve(__dirname, './src/constants/'),
+      '~store': path.resolve(__dirname, './src/store/'),
+      '~utils': path.resolve(__dirname, './src/utils/'),
     },
   },
   output: {
-    path: path.resolve(__dirname, 'dist '),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   module: {
@@ -29,6 +30,10 @@ module.exports = {
       {
         test: /\.(sc|sa|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },
