@@ -8,7 +8,7 @@ module.exports = {
   entry: './src/index.js',
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
     alias: {
       '~': path.resolve(__dirname, './src/'),
     },
@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.([jt]s)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
