@@ -7,12 +7,29 @@ import { getPixel, drawPixels } from '~/utils/drawing-canvas.utils.ts';
 
 let canvasesCount = 0;
 
-function onMouseMove({ target, clientX, clientY }) {
+function onMouseMove(event) {
+  const { target, clientX, clientY } = event;
   const { activeTool } = store.getState(EStateTypes.TOOLBAR_STATE);
   const { canvasHeight, canvasWidth, pixelSize } = store.getState(EStateTypes.CANVAS_STATE);
 
   const hoveredPixel = getPixel(target.getBoundingClientRect(), pixelSize, clientX, clientY);
-  const pixelsToDraw = createDrawer(activeTool).draw(hoveredPixel, canvasHeight, canvasWidth);
+
+  let pixelsToDraw = [];
+
+  if (event.ctrlKey && event.shiftKey) {
+    pixelsToDraw = [
+      ...createDrawer(activeTool).drawCtrl(hoveredPixel, canvasHeight, canvasWidth),
+      ...createDrawer(activeTool).drawShift(hoveredPixel, canvasHeight, canvasWidth),
+      ...createDrawer(activeTool).draw(hoveredPixel, canvasHeight, canvasWidth),
+    ];
+  } else if (event.ctrlKey) {
+    pixelsToDraw = createDrawer(activeTool).drawCtrl(hoveredPixel, canvasHeight, canvasWidth);
+  } else if (event.shiftKey) {
+    pixelsToDraw = createDrawer(activeTool).drawShift(hoveredPixel, canvasHeight, canvasWidth);
+  } else {
+    pixelsToDraw = createDrawer(activeTool).draw(hoveredPixel, canvasHeight, canvasWidth);
+  }
+
   drawPixels(target, pixelsToDraw);
 }
 
