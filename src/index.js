@@ -1,8 +1,8 @@
 import './index.scss';
 
 // renderers
-import renderToolbar from './renderers/toolbar';
-import renderDrawingArea from './renderers/drawing-area';
+import renderToolbar from './views/toolbar';
+import renderDrawingArea from './views/drawing-area';
 
 renderToolbar();
 renderDrawingArea();
