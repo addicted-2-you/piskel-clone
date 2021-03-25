@@ -1,0 +1,4 @@
+export enum EStateTypes {
+  CANVAS_STATE = 'CANVAS_STATE',
+  TOOLBAR_STATE = 'TOOLBAR_STATE',
+}

@@ -1,2 +1,0 @@
-export const CANVAS_STATE = 'CANVAS_STATE';
-export const TOOLBAR_STATE = 'TOOLBAR_STATE';

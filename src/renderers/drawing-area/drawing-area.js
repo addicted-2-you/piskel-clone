@@ -1,13 +1,19 @@
-import store from '~/store';
-import { CANVAS_STATE } from '~/store/state-types';
+import store from '~/store/index';
+import { EStateTypes } from '~/store/EStateTypes';
 
-import { getPixel, drawPixel } from '~/utils/drawing-canvas.utils';
+import { createDrawer } from '~/drawers/create-drawer';
+
+import { getPixel, drawPixels } from '~/utils/drawing-canvas.utils.ts';
 
 let canvasesCount = 0;
 
 function onMouseMove({ target, clientX, clientY }) {
-  const { xCoord, yCoord } = getPixel(target.getBoundingClientRect(), 20, clientX, clientY);
-  drawPixel(target, xCoord, yCoord, 20, '#000000');
+  const { activeTool } = store.getState(EStateTypes.TOOLBAR_STATE);
+  const { canvasHeight, canvasWidth, pixelSize } = store.getState(EStateTypes.CANVAS_STATE);
+
+  const hoveredPixel = getPixel(target.getBoundingClientRect(), pixelSize, clientX, clientY);
+  const pixelsToDraw = createDrawer(activeTool).draw(hoveredPixel, canvasHeight, canvasWidth);
+  drawPixels(target, pixelsToDraw);
 }
 
 function onMouseLeave({ target }) {
@@ -25,7 +31,6 @@ function onMouseUp({ target }) {
 
 export default () => {
   const drawingCanvas = document.createElement('canvas');
-
   drawingCanvas.id = `drawing-canvas-${(canvasesCount += 1)}`;
   drawingCanvas.classList.add('drawing-canvas');
   drawingCanvas.addEventListener('mousedown', onMouseDown);
@@ -33,7 +38,8 @@ export default () => {
 
   const drawingArea = document.getElementById('drawing-area');
 
-  store.subscribe(CANVAS_STATE, true, ({ canvasHeight, canvasWidth, pixelSize }) => {
+  store.subscribe(EStateTypes.CANVAS_STATE, true, ({ canvasHeight, canvasWidth, pixelSize }) => {
+    drawingCanvas.innerHTML = '';
     drawingCanvas.remove();
 
     drawingCanvas.height = canvasHeight * pixelSize;

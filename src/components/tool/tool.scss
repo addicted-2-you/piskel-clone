@@ -1,0 +1,26 @@
+.tool {
+  height: 46px;
+  width: 46px;
+
+  background-color: #525252;
+  background-image: url(~/assets/tool-icons.png);
+  opacity: 0.85;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+
+  &--pen {
+    background-position: -182px -92px;
+  }
+
+  &--mirror-pen {
+    background-position: 0px -136px;
+  }
+
+  &--active {
+    border: 2px solid #ffdf00;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
