@@ -1,4 +1,9 @@
 import { CFrame } from '~/models/CFrame';
+import { setActiveFrame } from '~/services/frame.services';
+
+function makeFrameActive(frameId: string) {
+  setActiveFrame(frameId);
+}
 
 export default (frame: CFrame, activeFrameId: string): HTMLElement => {
   const frameItem = document.createElement('li');
@@ -12,7 +17,8 @@ export default (frame: CFrame, activeFrameId: string): HTMLElement => {
   previewItem.id = `${frame.id}-preview`;
   previewItem.classList.add('preview');
 
-  frameItem.appendChild(previewItem);
+  frameItem.addEventListener('click', () => makeFrameActive(frame.id));
 
+  frameItem.appendChild(previewItem);
   return frameItem;
 };

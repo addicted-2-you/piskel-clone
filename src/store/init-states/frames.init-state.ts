@@ -1,4 +1,4 @@
-import { createFrame } from '~/services/create-frame';
+import { createFrame } from '~/services/frame.services';
 
 export const framesInitState = {
   activeFrameId: 'first-frame',

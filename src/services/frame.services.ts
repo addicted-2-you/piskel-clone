@@ -33,3 +33,7 @@ export function addFrame(): CFrame {
 
   return newFrame;
 }
+
+export function setActiveFrame(activeFrameId: string): void {
+  store.mutate(EStateTypes.FRAMES_STATE, { activeFrameId });
+}

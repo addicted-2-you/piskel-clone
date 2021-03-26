@@ -1,4 +1,4 @@
-import { addFrame } from '~/services/create-frame';
+import { addFrame } from '~/services/frame.services';
 
 function createNewFrame() {
   addFrame();
