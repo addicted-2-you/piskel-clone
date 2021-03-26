@@ -1,10 +1,13 @@
 import { EStateTypes } from './EStateTypes';
 
+// init states
 import { canvasInitState } from './init-states/canvas.init-state';
+import { framesInitState } from './init-states/frames.init-state';
 import { toolbarInitState } from './init-states/toolbar.init-state';
 
 const states = new Map();
 states.set(EStateTypes.CANVAS_STATE, canvasInitState);
+states.set(EStateTypes.FRAMES_STATE, framesInitState);
 states.set(EStateTypes.TOOLBAR_STATE, toolbarInitState);
 
 const stateSubscribersMap = new Map();

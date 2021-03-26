@@ -23,11 +23,15 @@ body {
   width: 220px;
 
   background-color: #1d1d1d;
+
+  &.toolbar-container {
+    display: flex;
+  }
 }
 
 .drawing-area {
   display: flex;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
 }

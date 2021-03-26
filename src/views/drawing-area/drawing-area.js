@@ -1,13 +1,13 @@
 import store from '~/store/index';
 import { EStateTypes } from '~/store/EStateTypes';
 
-import { createDrawer } from '~/drawers/create-drawer';
+import { createDrawer } from '~/services/create-drawer';
 
-import { getPixel, drawPixels } from '~/utils/drawing-canvas.utils.ts';
+import { getPixel, drawPixels } from '~/utils/drawing-canvas.utils';
 
 let canvasesCount = 0;
 
-function onMouseMove(event) {
+function onDraw(event) {
   const { target, clientX, clientY } = event;
   const { activeTool } = store.getState(EStateTypes.TOOLBAR_STATE);
   const { canvasHeight, canvasWidth, pixelSize } = store.getState(EStateTypes.CANVAS_STATE);
@@ -33,25 +33,28 @@ function onMouseMove(event) {
   drawPixels(target, pixelsToDraw);
 }
 
-function onMouseLeave({ target }) {
-  target.removeEventListener('mousemove', onMouseMove);
+function onStopDraw({ target }) {
+  target.removeEventListener('mousemove', onDraw);
+  target.removeEventListener('mouseleave', onStopDraw);
+
+  // update canvas image on the frame
+  const { activeFrameId } = store.getState(EStateTypes.FRAMES_STATE);
+  const activeFrameViewItem = document.getElementById(`${activeFrameId}-preview`);
+  activeFrameViewItem.style.backgroundImage = `url("${target.toDataURL('image/png', 1)}")`;
 }
 
-function onMouseDown({ target }) {
-  target.addEventListener('mousemove', onMouseMove);
-  target.addEventListener('mouseleave', onMouseLeave);
-}
-
-function onMouseUp({ target }) {
-  target.removeEventListener('mousemove', onMouseMove);
+function onStartDraw({ target }) {
+  target.addEventListener('mousemove', onDraw);
+  target.addEventListener('mouseleave', onStopDraw);
 }
 
 export default () => {
   const drawingCanvas = document.createElement('canvas');
   drawingCanvas.id = `drawing-canvas-${(canvasesCount += 1)}`;
   drawingCanvas.classList.add('drawing-canvas');
-  drawingCanvas.addEventListener('mousedown', onMouseDown);
-  drawingCanvas.addEventListener('mouseup', onMouseUp);
+  drawingCanvas.addEventListener('mousedown', onStartDraw);
+  drawingCanvas.addEventListener('mousedown', onDraw);
+  drawingCanvas.addEventListener('mouseup', onStopDraw);
 
   const drawingArea = document.getElementById('drawing-area');
 

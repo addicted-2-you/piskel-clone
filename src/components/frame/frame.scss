@@ -1,0 +1,32 @@
+$frame-size: 96px;
+
+.frame {
+  height: $frame-size;
+  width: $frame-size;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: 2px solid #2d2d2d;
+  border-radius: 5px;
+  background-image: url(~/assets/canvas-bg--dark.png);
+  background-repeat: repeat;
+
+  .preview {
+    position: absolute;
+    height: $frame-size;
+    width: $frame-size;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  + .frame {
+    margin-top: 5px;
+  }
+
+  &--active {
+    border: 2px solid #ffda00;
+  }
+}
