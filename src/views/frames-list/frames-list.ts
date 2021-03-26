@@ -3,21 +3,27 @@ import { EStateTypes } from '~/store/EStateTypes';
 
 import { CFrame } from '~/models/CFrame';
 
-import renderFrame from '~/components/frame';
+import createFrame from '~/components/frame';
+import createNewFrameButton from '~/components/new-frame-button';
 
-export default () => {
+export default (): void => {
   const toolbarContainer = document.getElementById('toolbar-container');
+  const framesContainer = document.getElementById('frames-conrainer') as HTMLElement;
 
   const framesList = document.createElement('ul');
-  framesList.classList.add('frames-container');
+  framesList.classList.add('frames-list');
+
+  const newFrameButton = createNewFrameButton();
+
+  framesContainer.append(framesList, newFrameButton);
+  toolbarContainer?.appendChild(framesContainer);
 
   store.subscribe(EStateTypes.FRAMES_STATE, true, ({ activeFrameId, frames }) => {
     framesList.innerHTML = '';
-    framesList.remove();
 
-    const frameItems = frames.map((frame: CFrame) => renderFrame(frame, activeFrameId));
+    const frameItems = frames.map((frame: CFrame) => createFrame(frame, activeFrameId));
     framesList.append(...frameItems);
 
-    toolbarContainer?.appendChild(framesList);
+    framesContainer?.replaceChild(framesList, framesList);
   });
 };

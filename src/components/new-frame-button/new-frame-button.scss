@@ -1,0 +1,33 @@
+.new-frame-button {
+  margin-top: 5px;
+  min-height: 38px;
+  width: 96px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  color: #888888;
+
+  border: 3px solid #888888;
+  border-radius: 4px;
+  background-color: #222222;
+
+  > * {
+    flex-grow: 1;
+  }
+
+  &--icon {
+    $new-frame-button-size: 26px;
+
+    height: $new-frame-button-size;
+    width: $new-frame-button-size;
+
+    background-image: url(~/assets/tool-icons.png);
+    background-position: -274px -157px;
+  }
+
+  &--text {
+    text-align: center;
+  }
+}
