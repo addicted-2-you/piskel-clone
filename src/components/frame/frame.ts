@@ -1,8 +1,8 @@
 import { CFrame } from '~/models/CFrame';
-import { setActiveFrame } from '~/services/frame.services';
+import { setActiveFrameId } from '~/services/frame.services';
 
 function makeFrameActive(frameId: string) {
-  setActiveFrame(frameId);
+  setActiveFrameId(frameId);
 }
 
 export default (frame: CFrame, activeFrameId: string): HTMLElement => {
@@ -16,6 +16,7 @@ export default (frame: CFrame, activeFrameId: string): HTMLElement => {
   const previewItem = document.createElement('div');
   previewItem.id = `${frame.id}-preview`;
   previewItem.classList.add('preview');
+  previewItem.style.backgroundImage = frame.canvasImage;
 
   frameItem.addEventListener('click', () => makeFrameActive(frame.id));
 

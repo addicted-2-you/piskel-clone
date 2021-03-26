@@ -1,9 +1,5 @@
 import { addFrame } from '~/services/frame.services';
 
-function createNewFrame() {
-  addFrame();
-}
-
 export default (): HTMLElement => {
   const newFrameButton = document.createElement('button');
   newFrameButton.classList.add('new-frame-button');
@@ -15,7 +11,7 @@ export default (): HTMLElement => {
   buttonText.classList.add('new-frame-button--text');
   buttonText.textContent = 'Add new frame';
 
-  newFrameButton.addEventListener('click', createNewFrame);
+  newFrameButton.addEventListener('click', addFrame);
 
   newFrameButton.append(buttonIcon, buttonText);
   return newFrameButton;

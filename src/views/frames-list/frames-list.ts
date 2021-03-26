@@ -3,7 +3,7 @@ import { EStateTypes } from '~/store/EStateTypes';
 
 import { CFrame } from '~/models/CFrame';
 
-import createFrame from '~/components/frame';
+import createFrameElement from '~/components/frame';
 import createNewFrameButton from '~/components/new-frame-button';
 
 export default (): void => {
@@ -21,7 +21,7 @@ export default (): void => {
   store.subscribe(EStateTypes.FRAMES_STATE, true, ({ activeFrameId, frames }) => {
     framesList.innerHTML = '';
 
-    const frameItems = frames.map((frame: CFrame) => createFrame(frame, activeFrameId));
+    const frameItems = frames.map((frame: CFrame) => createFrameElement(frame, activeFrameId));
     framesList.append(...frameItems);
 
     framesContainer?.replaceChild(framesList, framesList);
