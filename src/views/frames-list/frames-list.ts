@@ -18,12 +18,16 @@ export default (): void => {
   framesContainer.append(framesList, newFrameButton);
   toolbarContainer?.appendChild(framesContainer);
 
-  store.subscribe(EStateTypes.FRAMES_STATE, true, ({ activeFrameId, frames }) => {
-    framesList.innerHTML = '';
+  store.subscribe(
+    [EStateTypes.FRAMES_STATE],
+    true,
+    ({ [EStateTypes.FRAMES_STATE]: { activeFrameId, frames } }) => {
+      framesList.innerHTML = '';
 
-    const frameItems = frames.map((frame: CFrame) => createFrameElement(frame, activeFrameId));
-    framesList.append(...frameItems);
+      const frameItems = frames.map((frame: CFrame) => createFrameElement(frame, activeFrameId));
+      framesList.append(...frameItems);
 
-    framesContainer?.replaceChild(framesList, framesList);
-  });
+      framesContainer?.replaceChild(framesList, framesList);
+    },
+  );
 };
