@@ -1,0 +1,17 @@
+.animation-preview-container {
+  position: relative;
+  padding: 10px 15px;
+
+  background-image: url(~/assets/canvas-bg--dark.png);
+  background-repeat: repeat;
+
+  .animation-preview {
+    $animation-preview-size: 180px;
+
+    height: $animation-preview-size;
+    width: $animation-preview-size;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
