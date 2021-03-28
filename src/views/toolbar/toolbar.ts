@@ -9,6 +9,8 @@ export default (): void => {
   const toolbarContainer = document.getElementById('toolbar-container');
   const toolbar = document.getElementById('toolbar') as HTMLElement;
 
+  toolbarContainer?.appendChild(toolbar);
+
   store.subscribe(
     [EStateTypes.TOOLBAR_STATE],
     true,
@@ -19,8 +21,6 @@ export default (): void => {
         createTool(ETools.PEN, activeTool === ETools.PEN),
         createTool(ETools.MIRROR_PEN, activeTool === ETools.MIRROR_PEN),
       );
-
-      toolbarContainer?.appendChild(toolbar);
     },
   );
 };
