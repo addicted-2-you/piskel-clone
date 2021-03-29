@@ -48,24 +48,4 @@ export function saveDrawingCanvasPixels(
 
   // trigger update
   store.mutate(EStateTypes.FRAMES_STATE, {});
-
-  // const frames = getFrames();
-
-  // store.mutate(EStateTypes.FRAMES_STATE, {
-  //   frames: frames.map((frame) =>
-  //     frame.id === frameId
-  //       ? {
-  //           ...frame,
-  //           layers: frame.layers.map((layer) =>
-  //             layer.id === drawingCanvasId
-  //               ? {
-  //                   ...layer,
-  //                   pixels: [...layer.pixels, ...newPixels],
-  //                 }
-  //               : layer,
-  //           ),
-  //         }
-  //       : frame,
-  //   ),
-  // });
 }
