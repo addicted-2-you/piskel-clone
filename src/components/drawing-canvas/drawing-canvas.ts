@@ -17,9 +17,17 @@ let drawnPixels: CPixel[] = [];
 function onDraw(event) {
   const { target, clientX, clientY } = event;
   const { activeTool } = store.getState(EStateTypes.TOOLBAR_STATE);
-  const { canvasHeight, canvasWidth, pixelSize } = store.getState(EStateTypes.CANVAS_STATE);
+  const { canvasHeight, canvasWidth, pixelSize, penSize } = store.getState(
+    EStateTypes.CANVAS_STATE,
+  );
 
-  const hoveredPixel = getPixel(target.getBoundingClientRect(), pixelSize, clientX, clientY);
+  const hoveredPixel = getPixel(
+    target.getBoundingClientRect(),
+    pixelSize,
+    penSize,
+    clientX,
+    clientY,
+  );
 
   let pixelsToDraw = [];
 
@@ -37,8 +45,7 @@ function onDraw(event) {
     pixelsToDraw = createDrawer(activeTool).draw(hoveredPixel, canvasHeight, canvasWidth);
   }
 
-  drawPixels(target, pixelsToDraw);
-
+  drawPixels(target, pixelsToDraw, pixelSize);
   drawnPixels.push(...pixelsToDraw);
 }
 
@@ -65,13 +72,23 @@ function onStartDraw({ target }) {
   target.addEventListener('mouseleave', onStopDraw);
 }
 
-export default (drawingCanvas: CDrawingCanvas, activeFrameId: string): HTMLCanvasElement => {
+interface IDrawingCanvasElementProps {
+  drawingCanvas: CDrawingCanvas;
+  activeFrameId: string;
+  pixelSize: number;
+}
+
+export default ({
+  drawingCanvas,
+  activeFrameId,
+  pixelSize,
+}: IDrawingCanvasElementProps): HTMLCanvasElement => {
   const drawingCanvasElement = document.createElement('canvas');
   drawingCanvasElement.id = drawingCanvas.id;
   drawingCanvasElement.classList.add('drawing-canvas');
   drawingCanvasElement.style.display = activeFrameId === drawingCanvas.frameId ? 'block' : 'none';
-  drawingCanvasElement.height = drawingCanvas.height;
-  drawingCanvasElement.width = drawingCanvas.width;
+  drawingCanvasElement.height = drawingCanvas.pixelHeight * pixelSize;
+  drawingCanvasElement.width = drawingCanvas.pixelWidth * pixelSize;
   drawingCanvasElement.addEventListener('mousedown', onStartDraw);
   drawingCanvasElement.addEventListener('mousedown', onDraw);
   drawingCanvasElement.addEventListener('mouseup', onStopDraw);

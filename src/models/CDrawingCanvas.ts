@@ -47,14 +47,6 @@ export class CDrawingCanvas {
     return `drawing-canvas-${this.frameId}-${this.layerId}`;
   }
 
-  public get height(): number {
-    return this.pixelHeight * this.pixelSize;
-  }
-
-  public get width(): number {
-    return this.pixelWidth * this.pixelSize;
-  }
-
   public clone(): CDrawingCanvas {
     return new CDrawingCanvas(this);
   }

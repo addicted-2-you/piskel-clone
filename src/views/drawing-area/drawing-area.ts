@@ -11,17 +11,25 @@ export default (): void => {
   const drawingArea = document.getElementById('drawing-area') as HTMLElement;
 
   store.subscribe(
-    [EStateTypes.FRAMES_STATE],
+    [EStateTypes.FRAMES_STATE, EStateTypes.CANVAS_STATE],
     true,
-    ({ [EStateTypes.FRAMES_STATE]: { activeFrameId, frames } }) => {
+    ({
+      [EStateTypes.FRAMES_STATE]: { activeFrameId, frames },
+      [EStateTypes.CANVAS_STATE]: { pixelSize },
+    }) => {
       drawingArea.innerHTML = '';
 
       const activeFrame = frames.find((frame: CFrame) => frame.id === activeFrameId) as CFrame;
       const drawingCanvasesFragment = document.createDocumentFragment();
-      activeFrame.layers.forEach((layer) => {
-        const drawingCanvas = createDrawingCanvasElement(layer, activeFrameId);
-        drawPixels(drawingCanvas, layer.pixels);
-        drawingCanvasesFragment.appendChild(drawingCanvas);
+      activeFrame.layers.forEach((drawingCanvas) => {
+        const drawingCanvasElement = createDrawingCanvasElement({
+          drawingCanvas,
+          activeFrameId,
+          pixelSize,
+        });
+
+        drawPixels(drawingCanvasElement, drawingCanvas.pixels, pixelSize);
+        drawingCanvasesFragment.appendChild(drawingCanvasElement);
       });
 
       drawingArea.appendChild(drawingCanvasesFragment);

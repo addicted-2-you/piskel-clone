@@ -49,3 +49,21 @@ export function saveDrawingCanvasPixels(
   // trigger update
   store.mutate(EStateTypes.FRAMES_STATE, {});
 }
+
+export function getPixelSize(): number {
+  return store.getState(EStateTypes.CANVAS_STATE).pixelSize;
+}
+
+export function incrementPixelSize(): void {
+  const pixelSize = getPixelSize();
+  if (pixelSize < 27) {
+    store.mutate(EStateTypes.CANVAS_STATE, { pixelSize: pixelSize + 1 });
+  }
+}
+
+export function decrementPixelSize(): void {
+  const pixelSize = getPixelSize();
+  if (pixelSize > 10) {
+    store.mutate(EStateTypes.CANVAS_STATE, { pixelSize: pixelSize - 1 });
+  }
+}

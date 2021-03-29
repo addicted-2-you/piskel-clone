@@ -3,14 +3,14 @@ export class CPixel {
 
   public yCoord: number;
 
-  public size: number;
+  public penSize: number;
 
   public color: string;
 
-  constructor(xCoord: number, yCoord: number, size: number, color = '#000000') {
+  constructor(xCoord: number, yCoord: number, penSize: number, color = '#000000') {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
-    this.size = size;
+    this.penSize = penSize;
     this.color = color;
   }
 }
