@@ -24,9 +24,16 @@ export default (): void => {
     ({ [EStateTypes.FRAMES_STATE]: { activeFrameId, frames } }) => {
       framesList.innerHTML = '';
 
-      const frameItems = frames.map((frame: CFrame) => createFrameElement(frame, activeFrameId));
-      framesList.append(...frameItems);
+      const frameItems = frames.map((frame: CFrame, index: number) =>
+        createFrameElement({
+          frame,
+          activeFrameId,
+          orderNumber: index + 1,
+          framesCount: frames.length,
+        }),
+      );
 
+      framesList.append(...frameItems);
       framesContainer?.replaceChild(framesList, framesList);
     },
   );

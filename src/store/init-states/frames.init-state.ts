@@ -1,6 +1,6 @@
 import { createFrame } from '~/services/frame.services';
 
 export const framesInitState = {
-  activeFrameId: 'first-frame',
-  frames: [createFrame('first-frame')],
+  activeFrameId: '1',
+  frames: [createFrame('1')],
 };
