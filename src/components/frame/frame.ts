@@ -1,5 +1,5 @@
 import { CFrame } from '~/models/CFrame';
-import { setActiveFrameId } from '~/services/frame.services';
+import { setActiveFrameId } from '~/services/frames.services';
 
 // frame controls
 import { createOrderNumber } from './items/order-number-control';
@@ -13,12 +13,12 @@ function makeFrameActive(frameId: string) {
   setActiveFrameId(frameId);
 }
 
-function createTopControlsLine(frameOrderNumber: number, framesCount: number) {
+function createTopControlsLine(frameOrderNumber: number, framesCount: number, frameId: string) {
   const topControlsLine = document.createElement('div');
   topControlsLine.classList.add('frame-controls-line');
 
   const orderNumberControl = createOrderNumber(frameOrderNumber);
-  const deleteControl = createDeleteControl(framesCount > 1);
+  const deleteControl = createDeleteControl(framesCount > 1, frameId);
   topControlsLine.append(orderNumberControl, deleteControl);
 
   return topControlsLine;
@@ -55,7 +55,7 @@ export default ({
     frameItem.classList.add('frame--active');
   }
 
-  const topControlsLine = createTopControlsLine(orderNumber, framesCount);
+  const topControlsLine = createTopControlsLine(orderNumber, framesCount, frame.id);
   const previewItem = createFramePreview(frame.id, frame.canvasImage);
   const bottomControlsLine = createBottomControlsLine(framesCount);
   frameItem.append(topControlsLine, previewItem, bottomControlsLine);

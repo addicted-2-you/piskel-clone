@@ -1,4 +1,4 @@
-import { addFrame } from '~/services/frame.services';
+import { addFrame } from '~/services/frames.services';
 
 export default (): HTMLElement => {
   const newFrameButton = document.createElement('button');

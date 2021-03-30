@@ -10,7 +10,7 @@ import {
   getActiveDrawingCanvas,
   saveDrawingCanvasPixels,
 } from '~/services/drawing-canvas.services';
-import { getActiveFrame, setFrameCanvasImage } from '~/services/frame.services';
+import { getActiveFrame, setFrameCanvasImage } from '~/services/frames.services';
 
 let drawnPixels: CPixel[] = [];
 

@@ -4,7 +4,7 @@ import { EStateTypes } from '~/store/EStateTypes';
 import { CPixel } from '~/models/CPixel';
 import { CDrawingCanvas } from '~/models/CDrawingCanvas';
 
-import { getActiveFrame, getFrame } from './frame.services';
+import { getActiveFrame, getFrame } from './frames.services';
 
 const framesLayersMap = new Map<string, number>();
 

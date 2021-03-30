@@ -7,13 +7,6 @@ import { createDrawingCanvas } from './drawing-canvas.services';
 
 let framesCount = 0;
 
-/**
- *
- * Creates instance of the CFrame
- *
- * @param id
- * @returns created frame
- */
 export function createFrame(id?: string): CFrame {
   framesCount += 1;
 
@@ -21,12 +14,6 @@ export function createFrame(id?: string): CFrame {
   return new CFrame({ id: newFrameId, layers: [createDrawingCanvas(newFrameId)] });
 }
 
-/**
- *
- * Creates a frame and integrates it to the app
- *
- * @returns added frame
- */
 export function addFrame(): CFrame {
   const newFrame = createFrame();
   const { frames } = store.getState(EStateTypes.FRAMES_STATE);
@@ -60,4 +47,17 @@ export function setFrameCanvasImage(frameId: string, canvasImage: string): void 
   const frame = getFrame(frameId);
   frame.canvasImage = canvasImage;
   store.mutate(EStateTypes.FRAMES_STATE, {});
+}
+
+export function deleteFrame(frameId: string): void {
+  const { frames } = store.getState(EStateTypes.FRAMES_STATE);
+  const frameToDeleteIndex = frames.findIndex((frame) => frame.id === frameId);
+  const activeFrameId = frames[frameToDeleteIndex - 1]
+    ? frames[frameToDeleteIndex - 1].id
+    : frames[frameToDeleteIndex + 1].id;
+
+  store.mutate(EStateTypes.FRAMES_STATE, {
+    frames: frames.filter((frame) => frame.id !== frameId),
+    activeFrameId,
+  });
 }

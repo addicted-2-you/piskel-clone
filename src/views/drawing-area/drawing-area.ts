@@ -21,6 +21,7 @@ export default (): void => {
 
       const activeFrame = frames.find((frame: CFrame) => frame.id === activeFrameId) as CFrame;
       const drawingCanvasesFragment = document.createDocumentFragment();
+
       activeFrame.layers.forEach((drawingCanvas) => {
         const drawingCanvasElement = createDrawingCanvasElement({
           drawingCanvas,
