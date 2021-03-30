@@ -1,4 +1,5 @@
 import { CDrawingCanvas } from './CDrawingCanvas';
+import { CPixel } from './CPixel';
 
 interface IFrameProps {
   id: string;
@@ -20,5 +21,21 @@ export class CFrame {
     this.layers = layers;
     this.activeLayerId = layers[0]?.layerId || '';
     this.canvasImage = canvasImage;
+  }
+
+  public cloneLayers(newFrameId?: string): CDrawingCanvas[] {
+    return this.layers.map((layer) => {
+      const newLayer = new CDrawingCanvas({ ...layer });
+      newLayer.pixels = [];
+      if (newFrameId) {
+        newLayer.frameId = newFrameId;
+      }
+
+      layer.pixels.forEach((pixel) => {
+        newLayer.pixels.push(new CPixel(pixel.xCoord, pixel.yCoord, pixel.penSize, pixel.color));
+      });
+
+      return newLayer;
+    });
   }
 }

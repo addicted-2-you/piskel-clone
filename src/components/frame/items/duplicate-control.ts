@@ -1,6 +1,14 @@
+import { cloneFrame } from '~/services/frames.services';
+
 import { createControl } from './control';
 
-export function createDuplicateControl(): HTMLElement {
+function onDuplicateFrame(event: MouseEvent, frameId: string) {
+  event.stopPropagation();
+  cloneFrame(frameId);
+}
+
+export function createDuplicateControl(frameId: string): HTMLElement {
   const duplicateControl = createControl({ isVisible: true, type: 'duplicate' });
+  duplicateControl.addEventListener('click', (event) => onDuplicateFrame(event, frameId));
   return duplicateControl;
 }

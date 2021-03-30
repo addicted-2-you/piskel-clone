@@ -61,3 +61,14 @@ export function deleteFrame(frameId: string): void {
     activeFrameId,
   });
 }
+
+export function cloneFrame(frameId: string): void {
+  const { frames } = store.getState(EStateTypes.FRAMES_STATE);
+  const frameToCloneIndex = frames.findIndex((frame) => frame.id === frameId);
+  const frameToClone = frames[frameToCloneIndex];
+  const clonedFrame = createFrame();
+  clonedFrame.layers = frameToClone.cloneLayers(clonedFrame.id);
+  clonedFrame.canvasImage = frameToClone.canvasImage;
+  frames.splice(frameToCloneIndex + 1, 0, clonedFrame);
+  store.mutate(EStateTypes.FRAMES_STATE, {});
+}

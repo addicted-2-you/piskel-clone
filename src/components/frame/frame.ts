@@ -24,12 +24,12 @@ function createTopControlsLine(frameOrderNumber: number, framesCount: number, fr
   return topControlsLine;
 }
 
-function createBottomControlsLine(framesCount: number) {
+function createBottomControlsLine(framesCount: number, frameId: string) {
   const bottomControlsLine = document.createElement('div');
   bottomControlsLine.classList.add('frame-controls-line');
 
   const moveControl = createMoveControl(framesCount > 1);
-  const duplicateControl = createDuplicateControl();
+  const duplicateControl = createDuplicateControl(frameId);
   bottomControlsLine.append(moveControl, duplicateControl);
 
   return bottomControlsLine;
@@ -57,7 +57,7 @@ export default ({
 
   const topControlsLine = createTopControlsLine(orderNumber, framesCount, frame.id);
   const previewItem = createFramePreview(frame.id, frame.canvasImage);
-  const bottomControlsLine = createBottomControlsLine(framesCount);
+  const bottomControlsLine = createBottomControlsLine(framesCount, frame.id);
   frameItem.append(topControlsLine, previewItem, bottomControlsLine);
 
   frameItem.addEventListener('click', () => makeFrameActive(frame.id));
